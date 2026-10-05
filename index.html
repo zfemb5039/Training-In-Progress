@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>QAT eLearning — Reports</title>
+<title>QAT eLearning</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -247,6 +247,11 @@ button.shot:hover{border-color:var(--over)}
   .ex,.sandbox,.note,.eq,.tcard{break-inside:avoid;box-shadow:none}
   h1{font-size:20pt}h2{font-size:14pt}
   a[href]:after{content:""}
+  .screen-only{display:none!important}
+  .cert{border-color:#000;break-inside:avoid;margin:0;max-width:100%}
+  .cert-rule{background:#000}
+  .cert-name,.cert-course,.cert-score{color:#000}
+  @page{margin:14mm}
 }
 
 /* ---------- glossary ---------- */
@@ -303,6 +308,27 @@ button.shot:hover{border-color:var(--over)}
 .reflink{background:none;border:0;padding:0;font-family:var(--sans);font-size:13.5px;font-weight:600;
   color:var(--navy);border-bottom:1px solid var(--tint);cursor:pointer;text-align:left}
 .reflink:hover{border-bottom-color:var(--navy)}
+
+.cert{border:2px solid var(--navy);border-radius:4px;padding:44px 48px 34px;margin:18px 0 0;
+  max-width:760px;background:#fff;text-align:center}
+.cert-rule{height:6px;background:var(--navy);margin:-44px -48px 30px}
+.cert-kicker{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink3);margin:0 0 22px}
+.cert-name{font-family:var(--sans);font-size:32px;font-weight:700;letter-spacing:-.02em;
+  color:var(--navy);margin:0 0 4px;line-height:1.15}
+.cert-email{font-family:var(--sans);font-size:14px;color:var(--ink3);margin:0 0 14px}
+.cert-body{font-size:16px;color:var(--ink2);margin:0 auto 6px;max-width:48ch}
+.cert-course{font-family:var(--sans);font-size:21px;font-weight:600;color:var(--navy);
+  margin:14px auto 16px;max-width:30ch;line-height:1.3}
+.cert-score{font-family:var(--sans);font-size:38px;font-weight:700;color:var(--ok);
+  margin:6px 0 24px;font-variant-numeric:tabular-nums}
+.cert-foot{display:flex;justify-content:center;gap:52px;border-top:1px solid var(--rule);
+  padding-top:18px;font-family:var(--sans);flex-wrap:wrap}
+.cert-foot div span{display:block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:3px}
+.cert-foot div b{font-size:14.5px;color:var(--ink)}
+.cert-note{font-family:var(--sans);font-size:11.5px;line-height:1.5;color:var(--ink3);
+  margin:22px auto 0;max-width:62ch}
 
 /* ---------- help panel ---------- */
 .helpbtn{background:transparent;border:1.5px solid rgba(255,255,255,.45);color:#fff;
@@ -428,12 +454,12 @@ const IMG = {
 };
 
 /* ============================ COURSE CONTENT ============================ */
-const REPORTS = [
+const INTRO = [
 {
- id:'rv1', title:'What QAT is, and what a viewer can do', minutes:7,
+ id:'in1', title:'General overview: QAT, roles and terms', minutes:9,
  body:[
-  {t:'p',cls:'lede',c:'QAT is the Quantification Analytics Tool: a cloud-based system for country-led forecasting and supply planning. It replaced Quantimed for forecasting and PipeLine for supply planning. The supply planning module went live in December 2020 and the forecasting module in June 2022.'},
-  {t:'p',c:'This course covers the reports. It is written for the Reports Viewer role, so nothing here asks you to enter or change data.'},
+  {t:'p',cls:'lede',c:'QAT is the Quantification Analytics Tool: a cloud-based system for country-led forecasting and supply planning, used for any health commodity. It replaced Quantimed for forecasting and PipeLine for supply planning. The supply planning module went live in December 2020 and the forecasting module in June 2022.'},
+  {t:'p',c:'Quantification has two halves. Forecasting estimates how much of a product will be needed. Supply planning determines how much should be ordered and when it should arrive. QAT does both, and keeps them connected.'},
   {t:'h',c:'The three user roles'},
   {t:'table',head:['Can do','Program Admin','Program User','Reports Viewer'],rows:[
    ['Edit program settings — display name, lead times, budgets','Yes','No','No'],
@@ -441,19 +467,22 @@ const REPORTS = [
    ['View reports — consumption, inventory, shipments, stock status','Yes','Yes','Yes'],
    ['Raise tickets — report bugs, make suggestions and requests','Yes','Yes','Yes']
   ]},
-  {t:'p',c:'Supply planners hold the first two roles. The viewer role is for everyone else who needs the picture rather than the keyboard: ministry management, directors, donors, partners, procurement agents and regional advisors.'},
-  {t:'note',b:'One consequence worth knowing now',c:'Viewers see server programs only, not downloaded ones. A supply planner can work offline against a copy on their machine; what you see is always what has been uploaded to the server.'},
-  {t:'h',c:'Three terms that appear everywhere'},
+  {t:'p',c:'Supply planners hold the first two roles. The Reports Viewer role is for everyone who needs the picture rather than the keyboard: ministry management, directors, donors, partners, procurement agents and regional advisors.'},
+  {t:'note',b:'One consequence worth knowing now',c:'Viewers see server programs only, not downloaded ones. A planner can work offline against a copy on their own machine; what you see is always what has been uploaded to the server.'},
+  {t:'h',c:'Concepts and terms'},
   {t:'table',head:['Term','What it means'],rows:[
    ['Program','A supply plan: one country, one technical area such as ARV or malaria, one organisation such as the MOH, and one region'],
+   ['Technical area','The commodity group — ARV, malaria, lab, condoms, family planning'],
    ['Planning unit','A product, described up to its primary packaging — Abacavir 300 mg tablet, 60 tablets'],
-   ['Forecasting unit','The base unit underneath it — Abacavir 300 mg tablet. Some reports can be viewed in either']
+   ['Forecasting unit','The base unit underneath it — Abacavir 300 mg tablet. Some reports can be shown in either'],
+   ['Equivalency unit','A shared unit that lets related but different products be added together — malaria treatments, patient-months'],
+   ['Version','A numbered, dated snapshot of a program, created each time a planner uploads']
   ]},
-  {t:'h',c:'What the reports are for'},
-  {t:'p',c:'The questions QAT is built to answer are the ones stakeholders actually ask: are there stockouts forecast in the next 18 months, are any products at risk of expiry, who are the main funders and procurement agents, are there gaps in funding, how accurate has the forecast been, what happens if planned shipments do not arrive, and when was this supply plan last updated.'}
+  {t:'h',c:'What QAT is for'},
+  {t:'p',c:'The questions it is built to answer are the ones stakeholders actually ask. Are there stockouts forecast in the next 18 months? Are any products at risk of expiry? Who are the main funders and procurement agents? Are there gaps in funding? How accurate has the forecast been? If planned shipments do not arrive, what happens to inventory? When was this supply plan last updated?'}
  ],
  exercises:[
-  {type:'classify', tag:'Sort',
+  {type:'classify', tag:'Quiz',
    q:'Sort each action by whether a Reports Viewer can do it.',
    buckets:[{id:'yes',label:'A viewer can'},{id:'no',label:'A viewer cannot'}],
    items:[
@@ -464,65 +493,273 @@ const REPORTS = [
     {text:'Export a report to PDF',bucket:'yes'},
     {text:'Add a shipment to the plan',bucket:'no'}
    ],
-   explain:'Viewers can see everything and can raise tickets, but cannot change any data or setting. If a report shows something wrong, the route is a ticket or a conversation with the supply planner, not an edit.'},
-  {type:'mcq', tag:'Recall',
-   q:'Which combination defines a program in QAT?',
+   explain:'Viewers can see everything and can raise tickets, but change nothing. If a report shows something wrong, the route is a ticket or a conversation with the supply planner.'},
+  {type:'mcq', tag:'Quiz',
+   q:'Which role can change a program\u2019s lead time settings?',
+   options:['Program Admin only','Program Admin and Program User','All three roles','Reports Viewer only'],
+   answer:0,
+   explain:'Program settings — display name, lead times, budgets — are the admin\u2019s. Program users edit transactional data but not the settings around it.'},
+  {type:'mcq', tag:'Quiz',
+   q:'Which combination defines a program?',
    options:['One product and one funder','One country, one technical area, one organisation and one region',
             'One forecast and one supply plan','One warehouse and one year'],
    answer:1,
-   explain:'A program is a supply plan. When someone says "the Namibia ARV plan" they mean a program scoped exactly that way.'},
-  {type:'mcq', tag:'Apply',
-   q:'A supply planner tells you they have just fixed a figure. You refresh the report and it has not changed. What is the most likely reason?',
-   options:['Your account lacks permission','They have not uploaded their work to the server yet',
-            'The report caches for 24 hours','The figure was in a different program'],
+   explain:'A program is a supply plan. "The Namibia ARV plan" is a program scoped exactly that way.'},
+  {type:'mcq', tag:'Quiz',
+   q:'Abacavir 300 mg tablet, 60 tablets. Which unit is that?',
+   options:['The forecasting unit','The planning unit','The equivalency unit','The alternate reporting unit'],
    answer:1,
-   explain:'Planners work on a local copy and upload when ready. Until they do, the server still holds the previous version, and the server is all a viewer sees.'}
+   explain:'The planning unit describes the product up to its primary packaging. The forecasting unit underneath it is the single Abacavir 300 mg tablet.'},
+  {type:'mcq', tag:'Apply',
+   q:'A supply planner tells you they have just corrected a figure. You refresh and nothing has changed. Why?',
+   options:['Your account lacks permission','They have not uploaded their work to the server yet',
+            'Reports cache for 24 hours','The figure is in a different technical area'],
+   answer:1,
+   explain:'Planners work on a local copy and upload when ready. Until they do, the server holds the previous version — and the server is all a viewer sees.'}
  ]
 },
 {
- id:'rv2', title:'The dashboard', minutes:8,
+ id:'in2', title:'Logging in and installing QAT', minutes:8,
  body:[
-  {t:'p',cls:'lede',c:'The dashboard is the landing screen and the fastest route to an answer. It has three parts, and they answer progressively narrower questions.'},
+  {t:'p',cls:'lede',c:'Accounts are created by the QAT support team, so the first step is a request rather than a sign-up form. Once an account exists, first login is a password reset.'},
+  {t:'h',c:'First login, step by step'},
+  {t:'list',items:[
+   'The support team creates your account. You receive an email titled "QAT login credentials" from QAT_noreply.',
+   'Click Reset Password in that email. The link expires after 24 hours.',
+   'If it has expired, go to the QAT sign-in page and click Forgot Password, entering the email address you gave the support team. A fresh link is sent.',
+   'Set your password and submit.',
+   'You are redirected to the sign-in page. Log in with your User ID email and the new password.',
+   'Wait while master data syncs. It can take a couple of minutes on first login.'
+  ]},
+  {t:'note',b:'Password rules',c:'At least 6 characters, starting with a letter, not the same as your username or your previous password, and containing at least one uppercase letter, one number and one special character.'},
+  {t:'h',c:'Installing QAT as an app'},
+  {t:'p',c:'QAT is a progressive web application, which means it can be installed from the browser and run like a desktop program. The benefit is a cleaner interface without browser clutter, plus a desktop icon rather than a bookmark.'},
+  {t:'list',items:[
+   'Open the QAT address in Chrome or Edge. Chrome is the recommended browser.',
+   'Click the install icon at the right-hand end of the address bar.',
+   'A pop-up asks "Install App?" — click Install.',
+   'QAT then appears as a standalone application and a desktop icon.'
+  ]},
+  {t:'note',b:'If the install icon is missing',c:'It can take anywhere from minutes to hours to appear after you first open the address. This is normal — come back and try later rather than raising a ticket straight away.'},
+  {t:'h',c:'If something goes wrong'},
+  {t:'table',head:['Symptom','First thing to try'],rows:[
+   ['A screen looks stale or wrong','Ctrl + F5 to force a refresh'],
+   ['Still wrong after a refresh','Clear site data: Ctrl + Shift + I, then Application, Clear storage, Clear site data'],
+   ['Data disappears when you close QAT','Check free space on your C: drive, then check the browser settings that clear data on exit'],
+   ['None of the above works','Raise a ticket']
+  ]}
+ ],
+ exercises:[
+  {type:'mcq', tag:'Quiz',
+   q:'Your Reset Password link has expired. What do you do?',
+   options:['Ask a colleague to share their login','Use Forgot Password on the sign-in page with the email you gave the support team',
+            'Create a new account','Wait 24 hours for a new email'],
+   answer:1,
+   explain:'Forgot Password sends a fresh link to the registered address. Accounts are never shared — the role attached to your account controls what you can see.'},
+  {type:'mcq', tag:'Quiz',
+   q:'Which password would QAT accept?',
+   options:['qat2026','Qat26!','123Qat!','Q!2'],
+   answer:1,
+   explain:'Six characters, starts with a letter, and has an uppercase letter, a number and a special character. The first has no uppercase or special character, the third starts with a number, and the fourth is too short.'},
+  {type:'mcq', tag:'Quiz',
+   q:'What does installing QAT as a PWA give you?',
+   options:['Access to edit data','A streamlined interface and a desktop icon','A faster internet connection','A separate account'],
+   answer:1,
+   explain:'It is the same QAT in a cleaner window, launched from your desktop. It does not change your role or what you can do.'},
+  {type:'mcq', tag:'Quiz',
+   q:'You have opened QAT for the first time and there is no install icon in the address bar. What now?',
+   options:['Raise a ticket immediately','Reinstall the browser','Try again later — it can take minutes to hours to appear','Use a different email address'],
+   answer:2,
+   explain:'The delay is expected behaviour, not a fault. Chrome is the recommended browser if you have a choice.'},
+  {type:'mcq', tag:'Apply',
+   q:'A screen in QAT is showing stale information. What is the first thing to try?',
+   options:['Clear site data','Ctrl + F5 to force a refresh','Raise a bug ticket','Reinstall the PWA'],
+   answer:1,
+   explain:'Force refresh first, since it is instant and harmless. Clearing site data is the next step, and a ticket after that.'}
+ ]
+},
+{
+ id:'in3', title:'Basic navigation: the ribbon, the menu and the dashboard', minutes:10,
+ body:[
+  {t:'p',cls:'lede',c:'The QAT screen has three parts: the top ribbon, the sidebar menu, and the dashboard in the centre.'},
+  {t:'h',c:'The top ribbon'},
+  {t:'table',head:['Icon','What it does'],rows:[
+   ['Helpdesk','Opens the ticketing pop-up. Shows the number of your open tickets in a red box'],
+   ['User manual','Downloads the manual — the most useful icon up there'],
+   ['Refresh','Reloads QAT, much like refreshing the browser'],
+   ['Home','Returns to the dashboard'],
+   ['User profile','Your name, role and language, plus dark mode and password change'],
+   ['Logout','Ends the session']
+  ]},
+  {t:'note',b:'Zooming',c:'Ctrl plus the scroll wheel zooms the whole interface, which is worth knowing before you squint at a dense table. The three-dot browser menu does the same with its plus and minus controls.'},
+  {t:'h',c:'The sidebar menu'},
+  {t:'p',c:'The sidebar is where you go to reach the reports and, for planners, the data screens. It collapses with its own icon, and collapsing it is worth doing before you open a wide report — tables such as the stock status matrix use every pixel you can give them.'},
+  {t:'h',c:'The dashboard'},
+  {t:'p',c:'The dashboard is the landing screen and the fastest route to an answer. It has three sections, answering progressively narrower questions.'},
   {t:'table',head:['Section','Answers'],rows:[
    ['Ticker','What exists in QAT overall, what can I access, how many shipments are linked to a procurement system'],
    ['Overview','Across several programs: where are the stockouts, what are expiries costing, how many problems are open, when was each last uploaded'],
    ['Program Spotlight','For one program: stock status, forecast error, shipments by funder or agent, products with TBD funding, and expiries']
   ]},
-  {t:'h',c:'Reading the Overview'},
-  {t:'p',c:'Select the programs you want, then press Go — the table does not refresh until you do. Each row is a program. Planning units with stockouts is split red and blue, red being the number stocked out over the next 18 months. Total cost of expiries covers the same window and shows a dash when there is nothing. Open QAT problems counts outstanding items on the problem list.'},
-  {t:'h',c:'Reading the Program Spotlight'},
-  {t:'p',c:'One program at a time, over a report period you can set. Stock status appears as a bar showing what share of all product-months in the period fall into each status, so eighteen months across five products is ninety months, and the red portion is how many of those ninety are stockouts.'},
-  {t:'p',c:'Forecast error is the average percentage error over the period, and it turns red above the threshold — 50% by default, adjustable per product by a program administrator. A caution icon means there was not enough data to calculate it. The shipments pie can be grouped by funding source, procurement agent or status, and the percentages are by value rather than quantity, because products are counted in different units.'},
-  {t:'note',b:'Why some figures are missing offline',c:'Forecast error only appears for server versions, because the calculation takes too long to run against a downloaded copy. As a viewer you are always on server versions, so you will see it.'},
-  {t:'h',c:'Getting around'},
-  {t:'p',c:'The top ribbon carries, from the right, logout, your user profile — where language, dark mode and password live — then home, refresh, the user manual, and the QAT helpdesk. Ctrl and the scroll wheel zoom the whole interface, which is worth knowing before you squint at a dense table.'}
+  {t:'p',c:'In the Overview, select the programs you want and press Go — the table does not refresh until you do. Planning units with stockouts is split red and blue, red being the number stocked out over the next 18 months. Total cost of expiries covers the same window.'},
+  {t:'p',c:'In the Program Spotlight, stock status appears as a bar showing what share of all product-months in the report period fall into each status. Eighteen months across five products is ninety product-months, and the red portion is how many of those ninety are stockouts. Forecast error is the average percentage error over the period, turning red above the threshold — 50% by default. A caution icon instead of a percentage means there was not enough data to calculate it.'},
+  {t:'note',b:'Why the shipments pie is by value',c:'The percentages are based on total cost, not quantity, because products are counted in different units and cannot be summed. A funder with few but expensive shipments can dominate the chart.'}
  ],
  exercises:[
+  {type:'classify', tag:'Quiz',
+   q:'Match each need to where you would go.',
+   buckets:[{id:'ribbon',label:'Top ribbon'},{id:'dash',label:'Dashboard'}],
+   items:[
+    {text:'Change your password',bucket:'ribbon'},
+    {text:'Compare stockouts across your programs',bucket:'dash'},
+    {text:'Download the user manual',bucket:'ribbon'},
+    {text:'See which products have TBD funding',bucket:'dash'},
+    {text:'Report a bug',bucket:'ribbon'},
+    {text:'Check when a plan was last uploaded',bucket:'dash'}
+   ],
+   explain:'The ribbon is about your session and your account. The dashboard is about the data.'},
+  {type:'mcq', tag:'Quiz',
+   q:'The helpdesk icon shows a red box with a number in it. What is that number?',
+   options:['Unread messages','Your open tickets','Programs you can access','Bugs reported by everyone'],
+   answer:1,
+   explain:'It is a count of your own open tickets. It updates after a master data sync or a fresh login.'},
   {type:'mcq', tag:'Apply',
    q:'A director asks which of your eight programs is in the worst shape. Where do you look first?',
    options:['Program Spotlight','The Overview table','The Supply Plan Report','Shipment Details'],
    answer:1,
-   explain:'Overview compares programs side by side: stockouts, cost of expiries, open problems and when each was last uploaded. Spotlight is the follow-up once you know which program to dig into.'},
-  {type:'mcq', tag:'Read the screen',
-   q:'A Program Spotlight covers 18 months and 5 planning units, and the stock status bar shows 10% red. How many product-months are stocked out?',
+   explain:'Overview compares programs side by side. Spotlight is the follow-up once you know which one to dig into.'},
+  {type:'mcq', tag:'Quiz',
+   q:'A Program Spotlight covers 18 months and 5 planning units, and 10% of the stock status bar is red. How many product-months are stocked out?',
    options:['5','9','10','18'],
    answer:1,
-   explain:'18 months x 5 planning units = 90 product-months, and 10% of 90 is 9. The bar is a share of all product-months in the period, not a share of products.'},
-  {type:'mcq', tag:'Recall',
-   q:'The shipments pie chart is grouped by funding source. What do the percentages represent?',
-   options:['Number of shipments','Quantity shipped','Total value of the shipments','Number of planning units'],
-   answer:2,
-   explain:'Value, because quantity cannot be summed across products measured in different units. A funder with few but expensive shipments can dominate the chart.'},
-  {type:'mcq', tag:'Apply',
+   explain:'18 x 5 = 90 product-months, and 10% of 90 is 9. The bar is a share of product-months, not of products.'},
+  {type:'mcq', tag:'Quiz',
    q:'Forecast error shows a caution icon rather than a percentage. What does that mean?',
    options:['The error is above the threshold','There was not enough data to calculate it',
-            'The program has not been approved','The report period is too short'],
+            'The program is unapproved','The report period is too short'],
    answer:1,
-   explain:'Red means above threshold. The caution icon means the calculation could not be done at all, usually because actual consumption is missing.'}
+   explain:'Red means above threshold. The caution icon means it could not be calculated at all, usually because actual consumption is missing.'}
  ]
 },
 {
- id:'rv3', title:'The Supply Plan Report', minutes:10,
+ id:'in4', title:'Ticketing', minutes:9,
+ body:[
+  {t:'p',cls:'lede',c:'Tickets are service requests in QAT. They go directly to the HQ FASP team and the developers, who usually respond within one business day — some requests take longer to complete, but you will hear back either way.'},
+  {t:'p',c:'This is the one thing every role can do, viewers included. If something looks wrong, a ticket is the route.'},
+  {t:'h',c:'Four types of ticket'},
+  {t:'table',head:['Type','Use it when'],rows:[
+   ['Add or update user','A new colleague needs access, a stakeholder needs view-only access, or someone has changed technical area and needs a different program'],
+   ['Add or update master data','Something your country uses is missing from the shared catalogue, or an existing entry is wrong'],
+   ['Report a bug','Something is not working correctly'],
+   ['Request a change','You have a suggestion for how QAT should work']
+  ]},
+  {t:'note',b:'Before raising a master data ticket',c:'Check that it really does not already exist. Realm-level masters can be viewed in QAT; program-level masters can be changed by a program admin without a ticket at all.'},
+  {t:'h',c:'Three ways to raise one'},
+  {t:'list',items:[
+   'The helpdesk icon on the login page — useful if you cannot log in, if master data will not sync, or if you need an account in the first place.',
+   'The helpdesk icon on the top ribbon once you are logged in.',
+   'Automatically, from a QAT error screen. This applies to bugs only.'
+  ]},
+  {t:'p',c:'When QAT flags an error itself, the screen offers a comment box and a Raise a Ticket button. No screenshot is needed for that route, but describe what happened in as much detail as you can: what you were doing, what you clicked, and what appeared. For any other bug, attach a screenshot.'},
+  {t:'h',c:'Priority and what happens next'},
+  {t:'p',c:'Bugs can be given a priority — highest, high, medium or low — based on how the issue affects your work, and response and resolution times follow that priority.'},
+  {t:'list',items:[
+   'Your ticket is assigned a number.',
+   'Status notifications arrive by email.',
+   'The count of your open tickets appears on the top ribbon.',
+   'Tickets are managed in Jira by the HQ FASP team and the developers.'
+  ]},
+  {t:'p',c:'To follow up, reply directly to the email, or click the link in it and respond in the portal. A Jira account is optional; its advantage is seeing the original ticket and the full history in one place. You can also reach your tickets through Manage My Tickets in the helpdesk pop-up.'}
+ ],
+ exercises:[
+  {type:'classify', tag:'Quiz',
+   q:'Sort each situation by the type of ticket it calls for.',
+   buckets:[{id:'user',label:'Add or update user'},{id:'bug',label:'Report a bug'}],
+   items:[
+    {text:'A new country director needs view-only access',bucket:'user'},
+    {text:'A report returns an error screen',bucket:'bug'},
+    {text:'A colleague moves from family planning to also cover MCH',bucket:'user'},
+    {text:'A total does not match the rows above it',bucket:'bug'}
+   ],
+   explain:'Access questions and role changes are user tickets. Anything behaving incorrectly is a bug — and worth a screenshot.'},
+  {type:'mcq', tag:'Quiz',
+   q:'What are the three ways to raise a QAT ticket?',
+   options:['Email, phone, and the helpdesk','The login page helpdesk, the top ribbon helpdesk, and automatically from an error screen',
+            'Jira, email, and your program admin','Only through a program administrator'],
+   answer:1,
+   explain:'The automatic route applies to bugs only, and is the one case where no screenshot is required.'},
+  {type:'mcq', tag:'Quiz',
+   q:'You receive an email about a ticket update. How can you reply?',
+   options:['Only through Jira','Only by raising a new ticket','Reply to the email directly, or use the link to respond in the portal','You cannot reply'],
+   answer:2,
+   explain:'Email alone is enough. The portal is optional, and useful mainly because it shows the original ticket and all past activity.'},
+  {type:'mcq', tag:'Apply',
+   q:'A funding source your country uses is missing from QAT. What should you do first?',
+   options:['Raise a master data ticket straight away','Check whether it already exists, and whether a program admin can add it',
+            'Enter it manually in the report','Report it as a bug'],
+   answer:1,
+   explain:'Realm-level masters can be checked in QAT, and program-level masters a program admin can change without any ticket. Checking first saves everyone a round trip.'},
+  {type:'mcq', tag:'Recall',
+   q:'QAT shows an error screen with a comment box and a Raise a Ticket button. What should you write?',
+   options:['Nothing — the error is captured automatically','A short note saying it broke',
+            'As much detail as you can: what you were doing, the steps that led to it, and anything you can share',
+            'Your contact details'],
+   answer:2,
+   explain:'The developers have to reproduce the error before they can fix it. The more precisely you describe the path that led there, the faster that happens.'}
+ ]
+},
+{
+ id:'in5', title:'Working with versions', minutes:8,
+ body:[
+  {t:'p',cls:'lede',c:'Every time a planner uploads, QAT creates a new version of the program — numbered and dated. Understanding versions is what stops two people quoting different figures from the same plan.'},
+  {t:'p',c:'A higher version number means more recent data. The dropdown also shows the date each version was saved to the server, so you can see how current a plan actually is rather than assuming.'},
+  {t:'h',c:'Draft and final'},
+  {t:'table',head:['Version type','What it means'],rows:[
+   ['Draft','Uploaded at any time, as work proceeds. Most versions are drafts'],
+   ['Final','Submitted through the quarterly supply plan process'],
+   ['Final and approved','A final version that has passed formal review for data quality, procurement scheduling and supply planning practice. Marked with an asterisk']
+  ]},
+  {t:'img',src:'versions',alt:'The QAT version history table showing version numbers, draft and final version types, approval status and dates',
+   cap:'Version history. Note that the same version number can appear twice — once pending approval, then again once approved or returned for revision.'},
+  {t:'note',b:'Latest is not the same as approved',
+   c:'The most recent version is usually a draft. The approved version is often several numbers behind it. Some reports let you pick a version, or tick Use Approved Supply Plans Only — decide which you need before you quote a figure.'},
+  {t:'h',c:'Which one should you use?'},
+  {t:'table',head:['You need a figure for','Use'],rows:[
+   ['A formal quarterly submission or an external report','The most recent final and approved version'],
+   ['An operational question — what is happening now','The highest numbered version, approved or not'],
+   ['Comparing like with like across programs','The same basis for all of them, and say which']
+  ]},
+  {t:'p',c:'Whichever you choose, say so when you share the number. "Version 37, approved 3 September" removes an entire category of disagreement before it starts.'}
+ ],
+ exercises:[
+  {type:'mcq', tag:'Read the screen', img:'versions',
+   q:'Which version holds the most recent data?',
+   options:['Version 41','Version 37, marked Approved','Version 34, marked Approved','Version 33'],
+   answer:0,
+   explain:'The highest number is the most recent upload. Note that it is a draft — the newest data and the approved data are rarely the same version.'},
+  {type:'mcq', tag:'Judgement',
+   q:'You are preparing a figure for a formal quarterly submission. Which version should you quote?',
+   options:['The highest numbered','The most recent final and approved version','Any draft from this month','Whichever has fewest open problems'],
+   answer:1,
+   explain:'Approved versions have passed review for data quality, procurement scheduling and planning practice. For a formal figure, that review is the whole point.'},
+  {type:'mcq', tag:'Read the screen', img:'versions',
+   q:'Version 37 appears twice — once Pending Approval and once Approved. What happened?',
+   options:['A duplicate upload','It was submitted for review, then approved','Two planners uploaded the same version','It was rejected and resubmitted'],
+   answer:1,
+   explain:'The row records the submission, and a second row records the reviewer\u2019s decision. Version 33 shows the other outcome: Needs Revision.'},
+  {type:'mcq', tag:'Apply',
+   q:'A colleague quotes a stock figure that does not match yours, from the same program. What is the most likely explanation?',
+   options:['One of you misread the report','You are looking at different versions',
+            'The report is broken','The data has not synced'],
+   answer:1,
+   explain:'Different versions is by far the most common cause. Agreeing a version before comparing numbers resolves it immediately, which is why it is worth quoting the version alongside the figure.'}
+ ]
+}
+];
+
+const REPORTS = [
+{
+ id:'rp1', title:'The Supply Plan Report', minutes:10,
  body:[
   {t:'p',cls:'lede',c:'The most important report in the set. Its purpose is to assess the stock status of a single product by comparing stock against dynamic minimum and maximum levels, alongside consumption, inventory and shipment data.'},
   {t:'img',src:'graph',alt:'The supply plan report graph with stock area, consumption line, shipment bars and a months of stock line',
@@ -536,7 +773,15 @@ const REPORTS = [
   {t:'eq',c:'Months of stock = ending balance ÷ AMC'},
   {t:'widget',kind:'qatgraph'},
   {t:'note',b:'One month means little',c:'A single month above maximum or below minimum is rarely the story. What matters is the shape over the period: how long the dip lasts, whether a shipment arrives in time, and whether the pattern repeats.'}
- ],
+,
+  {t:'h',c:'Getting reports out of QAT'},
+  {t:'list',items:[
+   'Hover over any visual for more detail.',
+   'Show Data turns a graph into its underlying table.',
+   'Show Formulae reveals the calculations behind a report.',
+   'Table headers filter and sort.',
+   'Export to PDF or CSV from the top right, and right-click a graph to copy it straight into a slide.'
+  ]} ],
  exercises:[
   {type:'mcq', tag:'Recall',
    q:'How is months of stock calculated?',
@@ -566,7 +811,7 @@ const REPORTS = [
  ]
 },
 {
- id:'rv4', title:'Comparing across programs and products', minutes:8,
+ id:'rp2', title:'Supply Plan Report continued: comparing across programs and products', minutes:8,
  body:[
   {t:'p',cls:'lede',c:'The same report opens up in two directions: several programs holding the same product, and several products that are not the same but are related.'},
   {t:'h',c:'Multiple programs, one product'},
@@ -600,7 +845,7 @@ const REPORTS = [
  ]
 },
 {
- id:'rv5', title:'The Stock Status Matrix', minutes:9,
+ id:'rp3', title:'The Stock Status Matrix', minutes:9,
  body:[
   {t:'p',cls:'lede',c:'If the Supply Plan Report is one product in depth, the Stock Status Matrix is every product at a glance: planning units down the side, months across the top, and a colour in every cell.'},
   {t:'img',src:'matrix',alt:'The QAT stock status matrix showing four planning units across twelve months with stoplight colouring, a min/max column, and checkboxes to remove planned and TBD-funded shipments',
@@ -639,7 +884,7 @@ const REPORTS = [
  ]
 },
 {
- id:'rv6', title:'Shipment reports', minutes:7,
+ id:'rp4', title:'Shipment reports', minutes:7,
  body:[
   {t:'p',cls:'lede',c:'Three related reports answer questions about what is on order, who is paying, and when it lands.'},
   {t:'table',head:['Report','Use it for'],rows:[
@@ -678,7 +923,7 @@ const REPORTS = [
  ]
 },
 {
- id:'rv7', title:'Consumption and forecast error', minutes:8,
+ id:'rp5', title:'Consumption and forecast error', minutes:8,
  body:[
   {t:'p',cls:'lede',c:'Forecast error tells you whether the forecast underneath a supply plan can be trusted. A plan built on a poor forecast will be wrong no matter how carefully the shipments are scheduled.'},
   {t:'p',c:'Two kinds of consumption sit behind it. Actual consumption is what was issued and reported. Forecast consumption is what was expected. Forecast error is the gap between them, and QAT reports it monthly and by planning unit.'},
@@ -716,64 +961,102 @@ const REPORTS = [
  ]
 },
 {
- id:'rv8', title:'Expiries, the scorecard, and working with versions', minutes:9,
+ id:'rp6', title:'The Expiries Report', minutes:7,
  body:[
-  {t:'p',cls:'lede',c:'Three things that round out a viewer\u2019s picture: what is going to expire, how healthy the plan is overall, and which version of it you are looking at.'},
-  {t:'h',c:'Expiries'},
-  {t:'p',c:'Expiries are calculated at batch level. In QAT every batch starts with a shipment, or with a positive adjustment. The expiry date comes from the product\u2019s shelf life setting by default, or from a date the planner enters. Consumption draws down batches first expiry, first out unless a specific batch is nominated.'},
-  {t:'p',c:'Whatever is not consumed or adjusted away before its date becomes expired stock, and that is what the Expiries report shows — quantity in planning units, and cost.'},
-  {t:'h',c:'The Supply Plan Scorecard'},
-  {t:'p',c:'Each program carries a score built from the QAT problem list, across three areas: data quality, procurement scheduling, and commodity security. Higher is better, and planners aim for green at 90 to 100%.'},
-  {t:'p',c:'The report can be viewed for an individual program, aggregated by country, or aggregated by technical area — so a country can see whether malaria or ARV is performing better, and a global viewer can compare across countries.'},
-  {t:'h',c:'Versions'},
-  {t:'p',c:'Every upload creates a new version, numbered and dated. A higher number means more recent data. Versions come in two types, and the distinction matters when you quote a figure.'},
-  {t:'img',src:'versions',alt:'The QAT version history table showing version numbers, draft and final version types, approval status and dates',
-   cap:'Version history. Draft versions can be uploaded at any time; final versions go through the quarterly submission process and are marked Approved, Pending Approval, or Needs Revision.'},
-  {t:'note',b:'Latest is not the same as approved',
-   c:'A final and approved version has passed the formal quarterly review for data quality, procurement scheduling and supply planning practice. It is often not the newest version on the list. Some reports let you pick a version, or tick Use Approved Supply Plans Only — decide which you need before you quote a number.'},
-  {t:'h',c:'Getting reports out of QAT'},
+  {t:'p',cls:'lede',c:'Expiry is the quiet cost in a supply plan. Nothing goes wrong on the day it happens — the decision that caused it was an over-order a year or two earlier, and the report is where it finally surfaces.'},
+  {t:'h',c:'How QAT works out expiries'},
+  {t:'p',c:'Expiries are calculated at batch level, and in QAT every batch starts with a shipment — or, less commonly, with a positive adjustment.'},
+  {t:'table',head:['Setting','Default','Alternative'],rows:[
+   ['Expiry date','The product\u2019s shelf life applied to the receive date','A planner specifies the date'],
+   ['Consumption order','First expiry, first out','A planner nominates specific batches']
+  ]},
+  {t:'p',c:'Whatever is not consumed or adjusted away before its expiry date becomes expired stock. That is what the report shows: the quantity in planning units, and the cost, which is that quantity multiplied by the planning unit price.'},
+  {t:'h',c:'Where expiry shows up'},
   {t:'list',items:[
-   'Hover over any visual for more detail.',
-   'Show Data turns a graph into its underlying table.',
-   'Show Formulae reveals the calculations behind a report.',
-   'Table headers filter and sort.',
-   'Export to PDF or CSV from the top right, and right-click a graph to copy it straight into a slide.'
-  ]}
+   'The dashboard Overview gives total cost of expiries per program over the next 18 months, and a dash where there are none.',
+   'The Program Spotlight lists each expiry falling inside the report period.',
+   'The Supply Plan Report marks a projected expiry on the graph with an orange triangle.',
+   'The Stock Status Matrix marks the affected cell with a warning triangle.'
+  ]},
+  {t:'widget',kind:'batches'},
+  {t:'note',b:'Read expiry alongside overstock',c:'A product sitting above maximum for months is the leading indicator. By the time it appears in the expiries report the money is already spent, so the useful conversation is the one prompted by the yellow cells months earlier.'}
  ],
  exercises:[
-  {type:'mcq', tag:'Recall',
+  {type:'mcq', tag:'Quiz',
    q:'Where does QAT get the expiry date for a shipment?',
-   options:['It auto-calculates from the shelf life setting','The planner enters it','Either — it defaults to shelf life, and a planner can specify a date','It comes from the procurement agent'],
+   options:['Auto-calculated from the shelf life setting','The planner enters it',
+            'Either — it defaults to shelf life, and a planner can specify a date','From the procurement agent'],
    answer:2,
-   explain:'The default is the product shelf life applied to the receive date, and a planner can override it with a specific date.'},
-  {type:'mcq', tag:'Read the screen', img:'versions',
-   q:'Which version is likely to hold the most recent data?',
-   options:['Version 41','Version 37, marked Approved','Version 34, marked Approved','Version 33'],
-   answer:0,
-   explain:'The highest number is the most recent upload — version 41. Note that it is a draft: the most recent data and the approved data are often not the same version, which is why reports let you choose.'},
-  {type:'mcq', tag:'Judgement',
-   q:'You are preparing a figure for a formal quarterly submission. Which version should you quote?',
-   options:['The highest numbered version','The most recent final and approved version',
-            'Any draft from this month','Whichever has the fewest open problems'],
-   answer:1,
-   explain:'Approved versions have passed the GHSC-PSM review for data quality, procurement scheduling and planning practice. For a formal figure that review is the point; for an operational question, the latest draft may serve better.'},
+   explain:'The default applies the product shelf life to the receive date, and it can be overridden per batch.'},
   {type:'mcq', tag:'Recall',
-   q:'What are the three areas behind a program\u2019s scorecard?',
-   options:['Forecast accuracy, stock status, shipments','Data quality, procurement scheduling, commodity security',
-            'Consumption, inventory, adjustments','Cost, quantity, timing'],
+   q:'In QAT, what does a batch start with?',
+   options:['An inventory count','A shipment, or a positive adjustment','A consumption record','A forecast'],
    answer:1,
-   explain:'All three come from the QAT problem list. A score below green usually points at something concrete and fixable rather than at a general judgement.'},
+   explain:'Every batch originates with a shipment, or occasionally with a positive adjustment. That is why expiry dates trace back to receive dates.'},
   {type:'mcq', tag:'Apply',
-   q:'You need a graph from QAT in a slide deck for tomorrow. What is the quickest route?',
-   options:['Screenshot it','Right-click the graph and copy it','Export the whole report to CSV and rebuild the chart','Ask the supply planner to send it'],
+   q:'The expiries report shows a large cost for one product. Looking back, what would you expect to find on the stock status matrix?',
+   options:['Red cells several months earlier','Yellow cells several months earlier',
+            'Grey cells several months earlier','Nothing unusual'],
    answer:1,
-   explain:'Right-click copies the graph directly. Tables can be highlighted and pasted into Word, PowerPoint or Excel, and whole reports export to PDF or CSV.'}
+   explain:'Yellow is above maximum. Stock held well above the band for a sustained period is the condition that produces expiry, and it is visible long before the cost lands.'},
+  {type:'mcq', tag:'Recall',
+   q:'In what units does the expiries report show quantity?',
+   options:['Forecasting units','Planning units','Equivalency units','Alternate reporting units'],
+   answer:1,
+   explain:'Planning units, with cost calculated as that quantity multiplied by the planning unit price.'}
+ ]
+},
+{
+ id:'rp7', title:'The Supply Plan Scorecard', minutes:7,
+ body:[
+  {t:'p',cls:'lede',c:'The scorecard turns a supply plan into a single number, so programs can be compared without reading each one in full.'},
+  {t:'p',c:'Each program carries a score built from the QAT problem list, across three areas.'},
+  {t:'table',head:['Area','What it covers'],rows:[
+   ['Data quality','Whether the underlying records are complete and consistent'],
+   ['Procurement scheduling','Whether shipments are planned and dated sensibly'],
+   ['Commodity security','Whether the plan actually keeps products in stock']
+  ]},
+  {t:'p',c:'Higher is better, and scores are banded by colour. Supply planners aim for green, at 90 to 100%.'},
+  {t:'h',c:'Three ways to view it'},
+  {t:'table',head:['View','Answers'],rows:[
+   ['Individual program','How is this plan doing?'],
+   ['Aggregated by country','Which technical area in this country is performing best — malaria, ARV, lab?'],
+   ['Aggregated technical areas by country','How does this country compare with others on the same commodity group?']
+  ]},
+  {t:'p',c:'The second and third views are what make the scorecard useful to donors, procurement agents, regional advisors and portfolio managers, who are rarely looking at one plan in isolation.'},
+  {t:'note',b:'A score is a pointer, not a verdict',c:'Because it is built from the problem list, a low score usually resolves into something concrete and fixable rather than a general judgement about a team. The useful question is which of the three areas is pulling it down.'},
+  {t:'p',c:'The scorecard also appears on the dashboard, so you can see a program\u2019s score without opening the full report.'}
+ ],
+ exercises:[
+  {type:'mcq', tag:'Quiz',
+   q:'What three areas make up the scorecard?',
+   options:['Forecast accuracy, stock status, shipments','Data quality, procurement scheduling, commodity security',
+            'Cost, quantity, timing','Consumption, inventory, adjustments'],
+   answer:1,
+   explain:'All three are drawn from the QAT problem list, which is why a score points at specific outstanding items.'},
+  {type:'mcq', tag:'Recall',
+   q:'What score should a supply planner be aiming for?',
+   options:['Above 50%','Above 70%','90 to 100%','Any score above zero'],
+   answer:2,
+   explain:'Green is 90 to 100%. Anything below that has identifiable items behind it.'},
+  {type:'mcq', tag:'Apply',
+   q:'A regional advisor wants to know whether malaria plans are weaker than ARV plans across their countries. Which view?',
+   options:['Individual program','Aggregated technical areas by country','The dashboard ticker','Shipment Details'],
+   answer:1,
+   explain:'That view is built for exactly this comparison. The individual program view answers a narrower question.'},
+  {type:'mcq', tag:'Judgement',
+   q:'A program scores 62%. What is the most useful next step?',
+   options:['Ask the planner to improve it','Find which of the three areas is lowest and look at the problem list behind it',
+            'Compare it with other countries','Treat the plan as unusable'],
+   answer:1,
+   explain:'The score is a summary of the problem list. Opening that list turns a number into a list of specific things to resolve.'}
  ]
 }
 ];
 
 const TRACKS = [
- {id:'rv', title:'Reading QAT reports', blurb:'The dashboard, the supply plan report, the stock status matrix, shipments, forecast error, expiries, the scorecard and versions.', lessons:REPORTS}
+ {id:'in', title:'Intro to QAT', blurb:'What QAT is, the user roles and core terms, logging in and installing it, navigating the screen, raising tickets, and working with versions.', lessons:INTRO},
+ {id:'rp', title:'Reading QAT Reports', blurb:'The supply plan report, the stock status matrix, shipments, forecast error, expiries and the scorecard.', lessons:REPORTS}
 ];
 
 /* ============================ lesson lookup for exam references ============================ */
@@ -828,58 +1111,91 @@ const GLOSSARY = [
 const EXAM = [
  {q:'Which of these can a Reports Viewer do?',
   options:['Edit a shipment quantity','Change a lead time setting','View reports and raise tickets','Upload a new version'],
-  a:2, e:'Viewers see everything and can raise tickets, but change nothing.', ref:'rv1'},
+  a:2, e:'Viewers see everything and can raise tickets, but change nothing.', ref:'in1'},
+ {q:'Which role can change a program\u2019s lead time settings?',
+  options:['Program Admin only','Program Admin and Program User','All three roles','Reports Viewer only'],
+  a:0, e:'Program settings belong to the admin. Program users edit transactional data but not the settings around it.', ref:'in1'},
  {q:'A viewer is looking at a program. Which copy of the data are they seeing?',
   options:['The downloaded local copy','The latest version uploaded to the server','A nightly snapshot','Whichever the planner last opened'],
-  a:1, e:'Viewers see server programs only. Work in progress on a planner machine is not visible until uploaded.', ref:'rv1'},
- {q:'How is months of stock calculated?',
-  options:['Consumption / ending balance','Ending balance / AMC','AMC / opening balance','Opening balance / consumption'],
-  a:1, e:'Ending balance divided by average monthly consumption, recalculated every month.', ref:'rv3'},
- {q:'On the supply plan report, which consumption figure is used in the calculation?',
-  options:['Always the forecast','Always the actual','The actual where it exists, otherwise the forecast','The higher of the two'],
-  a:2, e:'Both are displayed, but the actual takes precedence in the arithmetic once it exists.', ref:'rv3'},
- {q:'On the stock status matrix, what does an orange cell mean?',
-  options:['Stocked out','Below minimum','Above maximum','No data'],
-  a:1, e:'Red is stocked out, orange below minimum, green stocked to plan, yellow above maximum, grey N/A.', ref:'rv5'},
- {q:'A stakeholder asks what happens if planned shipments do not arrive. What is the quickest answer?',
-  options:['Run the supply plan report per product','Tick Remove Planned Shipments on the stock status matrix','Compare two versions','Check the scorecard'],
-  a:1, e:'One checkbox recolours the whole matrix to show the position without them.', ref:'rv5'},
- {q:'What is consensus consumption in a multi-program report?',
-  options:['The average of the programs','The sum of actuals where available, otherwise the sum of forecasts','The highest reported figure','The agreed quantification figure'],
-  a:1, e:'It can mix actuals and forecasts within a single month.', ref:'rv4'},
- {q:'A donor wants one figure for malaria treatments across four pack sizes. What makes that possible?',
-  options:['An alternate reporting unit','An equivalency unit','A multi-program report','The scorecard'],
-  a:1, e:'Equivalency units convert each pack size to a shared measure so they can be added.', ref:'rv4'},
- {q:'Which report gives the receive date, status, agent and order ID of an individual shipment?',
-  options:['Shipment (by planning unit)','Shipment Details','Stock status matrix','Supply plan report'],
-  a:1, e:'Shipment Details is the line-by-line view; the others aggregate.', ref:'rv6'},
- {q:'You select several planning units on Shipment Details and the vertical axis changes. To what, and why?',
-  options:['To quantity, because products are comparable','To cost in USD, because quantities of different products cannot be summed','To months of stock','It does not change'],
-  a:1, e:'Different products are counted in different units, so value is the only summable measure.', ref:'rv6'},
- {q:'A product has a poor MAPE but an acceptable WAPE. What does that indicate?',
-  options:['The high-volume months were badly forecast','The errors sit in low-volume months','The forecast is biased high','The metrics used different periods'],
-  a:1, e:'MAPE weights months equally; WAPE weights by quantity. A big percentage miss on a tiny month moves only MAPE.', ref:'rv7'},
- {q:'A forecast line sits consistently above actual consumption all year. What follows?',
-  options:['Consumption is being under-reported','The product is over-forecast, tying up money and risking expiry','The supply plan is understocked','The AMC window is too short'],
-  a:1, e:'Over-forecasting buys product that is not needed, and it often ends as expiry. Flag it for the next quantification.', ref:'rv7'},
- {q:'Forecast error appears on the dashboard with a caution icon instead of a percentage. Why?',
-  options:['It is above the threshold','There was not enough data to calculate it','The version is a draft','The report period is too long'],
-  a:1, e:'Red means above threshold; the caution icon means it could not be calculated at all.', ref:'rv2'},
+  a:1, e:'Viewers see server programs only. Work in progress on a planner machine is not visible until uploaded.', ref:'in1'},
+ {q:'Your QAT Reset Password link has expired. What do you do?',
+  options:['Ask a colleague to share their login','Use Forgot Password with the email you gave the support team','Create a new account','Wait for a new email'],
+  a:1, e:'Forgot Password sends a fresh link. Accounts are never shared, because the role attached to yours controls what you see.', ref:'in2'},
+ {q:'What does installing QAT as a progressive web application give you?',
+  options:['Permission to edit data','A streamlined interface and a desktop icon','Offline editing rights','A separate account'],
+  a:1, e:'It is the same QAT in a cleaner window. It does not change your role.', ref:'in2'},
+ {q:'A screen in QAT is showing stale information. What should you try first?',
+  options:['Clear site data','Ctrl + F5 to force a refresh','Raise a bug ticket','Reinstall the PWA'],
+  a:1, e:'Force refresh first. Clearing site data is next, and a ticket after that.', ref:'in2'},
+ {q:'The helpdesk icon on the top ribbon shows a red box with a number. What is it counting?',
+  options:['Unread messages','Your open tickets','Programs you can access','Bugs reported by all users'],
+  a:1, e:'Your own open tickets. It updates after a master data sync or a fresh login.', ref:'in3'},
  {q:'A Program Spotlight covers 18 months and 5 planning units, and 10% of the stock status bar is red. How many product-months are stocked out?',
   options:['5','9','10','18'],
-  a:1, e:'18 x 5 = 90 product-months, and 10% of 90 is 9.', ref:'rv2'},
- {q:'Where does QAT get the expiry date for a shipment?',
-  options:['Auto-calculated from the shelf life setting','Entered by the planner','Either, depending on whether a planner specifies one','From the procurement agent'],
-  a:2, e:'It defaults to the shelf life applied to the receive date, and can be overridden per batch.', ref:'rv8'},
+  a:1, e:'18 x 5 = 90 product-months, and 10% of 90 is 9.', ref:'in3'},
+ {q:'Why is the dashboard shipments pie calculated by value rather than quantity?',
+  options:['Value is easier to read','Quantities of different products cannot be summed','Donors prefer cost','Quantity is unavailable'],
+  a:1, e:'Products are counted in different units, so cost is the only summable measure.', ref:'in3'},
+ {q:'What are the three ways to raise a QAT ticket?',
+  options:['Email, phone and the helpdesk','The login page helpdesk, the top ribbon helpdesk, and automatically from an error screen','Jira, email and your program admin','Only through a program administrator'],
+  a:1, e:'The automatic route is for bugs only, and is the one case where no screenshot is needed.', ref:'in4'},
+ {q:'Which is NOT one of the four ticket types?',
+  options:['Add or update user','Add or update master data','Reset another user\u2019s password','Report a bug'],
+  a:2, e:'The four are add or update user, add or update master data, report a bug, and request a change.', ref:'in4'},
+ {q:'You receive an email about a ticket update. How can you reply?',
+  options:['Only through Jira','Only by raising a new ticket','Reply to the email, or use the link to respond in the portal','You cannot reply'],
+  a:2, e:'Email alone is enough. The portal is optional and shows the full history.', ref:'in4'},
  {q:'Which version of a program holds the most recent data?',
   options:['The lowest numbered','The highest numbered','The one marked Approved','The first final version'],
-  a:1, e:'Numbers increase with each upload. The most recent and the approved version are often not the same one.', ref:'rv8'},
- {q:'What three areas make up the supply plan scorecard?',
-  options:['Forecast accuracy, stock status, shipments','Data quality, procurement scheduling, commodity security','Cost, quantity, timing','Consumption, inventory, adjustments'],
-  a:1, e:'All three are drawn from the QAT problem list.', ref:'rv8'},
+  a:1, e:'Numbers increase with each upload. The most recent and the approved version are often different.', ref:'in5'},
+ {q:'You are preparing a figure for a formal quarterly submission. Which version should you quote?',
+  options:['The highest numbered','The most recent final and approved version','Any draft from this month','Whichever has fewest open problems'],
+  a:1, e:'Approved versions have passed review for data quality, procurement scheduling and planning practice.', ref:'in5'},
+ {q:'How is months of stock calculated?',
+  options:['Consumption / ending balance','Ending balance / AMC','AMC / opening balance','Opening balance / consumption'],
+  a:1, e:'Ending balance divided by average monthly consumption, recalculated every month.', ref:'rp1'},
+ {q:'On the supply plan report, which consumption figure is used in the calculation?',
+  options:['Always the forecast','Always the actual','The actual where it exists, otherwise the forecast','The higher of the two'],
+  a:2, e:'Both are displayed, but the actual takes precedence once it exists.', ref:'rp1'},
  {q:'Which control shows the calculations behind a report?',
   options:['Show Data','Show Formulae','Export CSV','Hover'],
-  a:1, e:'Show Data gives the tabular version of a graph; Show Formulae reveals the underlying calculations.', ref:'rv8'}
+  a:1, e:'Show Data gives the tabular version of a graph; Show Formulae reveals the underlying calculations.', ref:'rp1'},
+ {q:'What is consensus consumption in a multi-program report?',
+  options:['The average of the programs','The sum of actuals where available, otherwise the sum of forecasts','The highest reported figure','The agreed quantification figure'],
+  a:1, e:'It can mix actuals and forecasts within a single month.', ref:'rp2'},
+ {q:'A donor wants one figure for malaria treatments across four pack sizes. What makes that possible?',
+  options:['An alternate reporting unit','An equivalency unit','A multi-program report','The scorecard'],
+  a:1, e:'Equivalency units convert each pack size to a shared measure so they can be added.', ref:'rp2'},
+ {q:'On the stock status matrix, what does an orange cell mean?',
+  options:['Stocked out','Below minimum','Above maximum','No data'],
+  a:1, e:'Red is stocked out, orange below minimum, green stocked to plan, yellow above maximum, grey N/A.', ref:'rp3'},
+ {q:'A stakeholder asks what happens if planned shipments do not arrive. What is the quickest answer?',
+  options:['Run the supply plan report per product','Tick Remove Planned Shipments on the stock status matrix','Compare two versions','Check the scorecard'],
+  a:1, e:'One checkbox recolours the whole matrix to show the position without them.', ref:'rp3'},
+ {q:'Which report gives the receive date, status, agent and order ID of an individual shipment?',
+  options:['Shipment (by planning unit)','Shipment Details','Stock status matrix','Supply plan report'],
+  a:1, e:'Shipment Details is the line-by-line view; the others aggregate.', ref:'rp4'},
+ {q:'You select several planning units on Shipment Details and the vertical axis changes. To what, and why?',
+  options:['To quantity, because products are comparable','To cost in USD, because quantities of different products cannot be summed','To months of stock','It does not change'],
+  a:1, e:'Different products are counted in different units, so value is the only summable measure.', ref:'rp4'},
+ {q:'A product has a poor MAPE but an acceptable WAPE. What does that indicate?',
+  options:['The high-volume months were badly forecast','The errors sit in low-volume months','The forecast is biased high','The metrics used different periods'],
+  a:1, e:'MAPE weights months equally; WAPE weights by quantity.', ref:'rp5'},
+ {q:'A forecast line sits consistently above actual consumption all year. What follows?',
+  options:['Consumption is under-reported','The product is over-forecast, tying up money and risking expiry','The plan is understocked','The AMC window is too short'],
+  a:1, e:'Over-forecasting buys product that is not needed, and it often ends as expiry.', ref:'rp5'},
+ {q:'Where does QAT get the expiry date for a shipment?',
+  options:['Auto-calculated from the shelf life setting','Entered by the planner','Either, depending on whether a planner specifies one','From the procurement agent'],
+  a:2, e:'It defaults to shelf life applied to the receive date, and can be overridden per batch.', ref:'rp6'},
+ {q:'In QAT, what does a batch start with?',
+  options:['An inventory count','A shipment, or a positive adjustment','A consumption record','A forecast'],
+  a:1, e:'Every batch originates with a shipment, or occasionally a positive adjustment.', ref:'rp6'},
+ {q:'What three areas make up the supply plan scorecard?',
+  options:['Forecast accuracy, stock status, shipments','Data quality, procurement scheduling, commodity security','Cost, quantity, timing','Consumption, inventory, adjustments'],
+  a:1, e:'All three are drawn from the QAT problem list.', ref:'rp7'},
+ {q:'A regional advisor wants to compare malaria plans against ARV plans across countries. Which scorecard view?',
+  options:['Individual program','Aggregated technical areas by country','The dashboard ticker','Shipment Details'],
+  a:1, e:'That view is built for exactly this comparison.', ref:'rp7'}
 ];
 
 /* ============================ shared UI ============================ */
@@ -2132,9 +2448,9 @@ function loadProgress(){
     return d;
   }catch(e){ return null; }   // storage blocked or quota — run without it
 }
-function saveProgress(ex, loc){
+function saveProgress(ex, loc, name, email){
   try{
-    window.localStorage.setItem(STORE_KEY, JSON.stringify({v:1, ex:ex, loc:loc, at:Date.now()}));
+    window.localStorage.setItem(STORE_KEY, JSON.stringify({v:1, ex:ex, loc:loc, name:name||'', email:email||'', at:Date.now()}));
     return true;
   }catch(e){ return false; }
 }
@@ -2241,6 +2557,30 @@ function Help({onClose}){
   </div>;
 }
 
+/* ============================ completion certificate ============================ */
+const PASS_MARK = 8;
+function Certificate({name, email, score, outOf}){
+  const today = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const mins = FLAT.reduce((a,f)=>a+f.ls.minutes,0);
+  return <div className="cert">
+    <div className="cert-rule"></div>
+    <p className="cert-kicker">Certificate of completion</p>
+    <p className="cert-name">{name}</p>
+    {email? <p className="cert-email">{email}</p> : null}
+    <p className="cert-body">has completed the self-paced course</p>
+    <p className="cert-course">QAT for Report Viewers</p>
+    <p className="cert-body">{FLAT.length} lessons across {TRACKS.length} modules, approximately{' '}
+      {Math.round(mins/60)} hours, with a final assessment score of</p>
+    <p className="cert-score">{score} / {outOf}</p>
+    <div className="cert-foot">
+      <div><span>Date</span><b>{today}</b></div>
+      <div><span>Assessment</span><b>{Math.round(score/outOf*100)}% (pass mark {Math.round(PASS_MARK/outOf*100)}%)</b></div>
+    </div>
+    <p className="cert-note">Based on the QAT user manual and the FASP training materials. A self-paced
+      study aid, not an official QAT or GHSC-PSM certification. Content reviewed September 2026.</p>
+  </div>;
+}
+
 /* ============================ app ============================ */
 const FLAT = [];
 TRACKS.forEach((tr,ti)=> tr.lessons.forEach((ls,li)=> FLAT.push({ti,li,tr,ls})));
@@ -2267,10 +2607,10 @@ function Rail({loc, go, isDone}){
 
 function Home({isDone, go, resume, onReset, stored, canSave}){
   return <div className="hero">
-    <h1>Reading reports in QAT</h1>
-    <p className="lede">A short course for the Reports Viewer role: eight lessons on the dashboard and
-    the reports, with worked examples and screens from QAT. Nothing here asks you to enter or change
-    data. Your progress is kept in this browser as you go.</p>
+    <h1>QAT for report viewers</h1>
+    <p className="lede">A course for the Reports Viewer role, in two modules: getting started in QAT,
+    then reading the reports. Twelve lessons with worked examples and screens from QAT. Nothing here
+    asks you to enter or change data, and your progress is kept in this browser as you go.</p>
     <Chart opts={{values:[9.0,8.2,7.4,6.6,5.8,5.0,4.2,3.4,2.6,1.8,0.9,0],min:3,max:5,animate:true}}/>
     <div className="cards">{TRACKS.map((tr,ti)=>{
       const n = tr.lessons.filter(isDone).length;
@@ -2340,13 +2680,14 @@ function Glossary(){
   </div>;
 }
 
-function ExamView({exam, setExam, start, retry, doneCount, total, back, go}){
+function ExamView({exam, setExam, start, retry, doneCount, total, back, go, name, setName, email, setEmail}){
   if(!exam) return <div>
     <p className="kicker">Assessment</p>
     <h1>Exam</h1>
-    <p className="lede">Ten questions drawn at random from a pool of {EXAM.length}, covering the whole course.
-    One attempt each, with an explanation after every answer. Retake it as often as you like — the
-    questions will differ.</p>
+    <p className="lede">Ten questions drawn at random from a pool of {EXAM.length}, covering both modules.
+    One attempt each, with an explanation and a link to the lesson it came from. The pass mark is
+    {PASS_MARK} of 10, and passing produces a printable certificate. Retake it as often as you like;
+    the questions will differ.</p>
     <p>{doneCount < total
       ? 'You have '+(total-doneCount)+' lesson'+(total-doneCount===1?'':'s')+' still open. The exam is available anyway.'
       : 'Both tracks complete. Good time to take it.'}</p>
@@ -2356,17 +2697,46 @@ function ExamView({exam, setExam, start, retry, doneCount, total, back, go}){
   if(exam.done){
     const score = exam.ans.filter(a=>a.ok).length;
     const missed = exam.ans.filter(a=>!a.ok);
+    const passed = score >= PASS_MARK;
     return <div>
+      <div className="screen-only">
       <p className="kicker">Exam complete</p>
       <p className="score">{score}<small> / {exam.qs.length}</small></p>
-      <h1 style={{fontSize:'28px',marginTop:'14px',maxWidth:'24ch'}}>
-        {score===exam.qs.length ? 'Full marks.' : score>=7 ? 'Comfortably through.' : 'Worth another pass.'}</h1>
+      <h1 style={{fontSize:'28px',marginTop:'14px',maxWidth:'26ch'}}>
+        {passed ? (score===exam.qs.length ? 'Full marks.' : 'Passed.')
+                : 'Not passed \u2014 ' + PASS_MARK + ' of ' + exam.qs.length + ' needed.'}</h1>
       {missed.length ? <div>
         <h2>What you missed</h2>
-        {missed.map((a,i)=><div className="note" key={i}>
-          <b>{EXAM[a.q].q}</b>{EXAM[a.q].e}</div>)}
-      </div> : <p className="lede">Nothing to review. You can read a QAT supply plan and say why any month is the colour it is.</p>}
-      <div className="foot">
+        {missed.map((a,i)=>{
+          const r = LESSON_REF[EXAM[a.q].ref];
+          return <div className="note" key={i}>
+            <b>{EXAM[a.q].q}</b>{EXAM[a.q].e}
+            {r? <span className="refline">Covered in{' '}
+              <button className="reflink" onClick={()=>go(r.ti, r.li)}>
+                {r.track}, lesson {r.num}: {r.title}</button></span> : null}
+          </div>;
+        })}
+      </div> : <p className="lede">Nothing to review.</p>}
+      </div>
+
+      {passed ? <div>
+        <div className="screen-only">
+          <h2 style={{marginTop:'30px'}}>Certificate</h2>
+          <p style={{maxWidth:'60ch'}}>Enter your name and work email as they should appear on the
+            certificate, then print it or save it as a PDF. Send the PDF to your training coordinator
+            so your completion can be recorded.</p>
+          <div className="numrow">
+            <input type="text" value={name} placeholder="Full name" aria-label="Name for the certificate"
+              style={{width:'240px'}} onChange={e=>setName(e.target.value)} />
+            <input type="text" value={email} placeholder="Work email" aria-label="Email for the certificate"
+              style={{width:'240px'}} onChange={e=>setEmail(e.target.value)} />
+            <button className="btn" disabled={!name.trim()} onClick={()=>window.print()}>Print or save as PDF</button>
+          </div>
+        </div>
+        {name.trim()? <Certificate name={name.trim()} email={email.trim()} score={score} outOf={exam.qs.length}/> : null}
+      </div> : null}
+
+      <div className="foot screen-only">
         {missed.length? <button className="btn" onClick={()=>retry(missed.map(a=>a.q))}>
           Retry Incorrect Answers</button> : null}
         <button className={missed.length? 'btn ghost' : 'btn'} onClick={start}>Take a fresh exam</button>
@@ -2417,6 +2787,8 @@ function App(){
   const [ex,setEx] = useState(saved.current ? saved.current.ex : {});
   const [exam,setExam] = useState(null);
   const [help,setHelp] = useState(false);
+  const [learner,setLearner] = useState(saved.current ? (saved.current.name||'') : '');
+  const [learnerEmail,setLearnerEmail] = useState(saved.current ? (saved.current.email||'') : '');
   const canSave = useRef(storageWorks());
   const [stored,setStored] = useState(!!saved.current);
   const mainRef = useRef(null);
@@ -2424,8 +2796,8 @@ function App(){
 
   useEffect(()=>{
     if(firstRun.current){ firstRun.current = false; return; }
-    if(saveProgress(ex, loc)) setStored(true);
-  }, [ex, loc]);
+    if(saveProgress(ex, loc, learner, learnerEmail)) setStored(true);
+  }, [ex, loc, learner, learnerEmail]);
 
   useEffect(()=>{
     if(loc && mainRef.current) mainRef.current.focus({preventScroll:true});
@@ -2466,7 +2838,7 @@ function App(){
     window.scrollTo(0,0);
   }
   function reset(){
-    clearProgress(); saved.current=null; setEx({}); setExam(null); setLoc(null);
+    clearProgress(); saved.current=null; setEx({}); setExam(null); setLoc(null); setLearner(''); setLearnerEmail('');
     setStored(false); firstRun.current=true; window.scrollTo(0,0);
   }
   function startExam(){
@@ -2482,7 +2854,7 @@ function App(){
       <div className="top-in">
         <button className="wordmark" style={{border:0,background:'none',padding:0}}
           onClick={()=>{setTab('course');setLoc(null);window.scrollTo(0,0);}}>
-          QAT <span>eLearning · Reports</span></button>
+          QAT <span>eLearning</span></button>
         <div className="tabs">
           <button className="tab" data-on={tab==='course'?'1':'0'} onClick={()=>setTab('course')}>Course</button>
           <button className="tab" data-on={tab==='glossary'?'1':'0'} onClick={()=>{setTab('glossary');window.scrollTo(0,0);}}>Glossary</button>
@@ -2509,7 +2881,8 @@ function App(){
             {tab==='glossary'
               ? <Glossary/>
               : <ExamView exam={exam} setExam={setExam} start={startExam} retry={retryExam}
-                  go={go} doneCount={doneCount} total={FLAT.length}
+                  go={go} name={learner} setName={setLearner} email={learnerEmail} setEmail={setLearnerEmail}
+                  doneCount={doneCount} total={FLAT.length}
                   back={()=>{setExam(null);setTab('course');setLoc(null);window.scrollTo(0,0);}}/>}
           </div>}
     </div>
