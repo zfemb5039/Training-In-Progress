@@ -377,8 +377,10 @@ button.shot:hover{border-color:var(--over)}
 @media print{.pagefoot{display:none}}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.draw{stroke-dasharray:1500;stroke-dashoffset:1500;animation:draw 1.6s .2s ease forward}
+.draw{stroke-dasharray:1500;stroke-dashoffset:1500;animation:draw 1.6s .2s ease forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
+/* with animations off the line must still be visible, not left at full offset */
+@media (prefers-reduced-motion:reduce){.draw{stroke-dasharray:none;stroke-dashoffset:0}}
 .task{background:var(--tint-soft);border:1px solid var(--tint);border-radius:10px;padding:16px 18px;margin:0 0 18px}
 .taskgoal{font-family:var(--sans);font-size:16px;font-weight:600;color:var(--navy);margin:0 0 12px;max-width:var(--measure)}
 .taskcrit{list-style:none;margin:0 0 12px;padding:0;font-family:var(--sans);font-size:14px}
