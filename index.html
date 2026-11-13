@@ -3369,10 +3369,9 @@ function ExamView({exam, setExam, start, retry, doneCount, total, back, go, name
   if(!exam) return <div>
     <p className="kicker">Assessment</p>
     <h1>Exam</h1>
-    <p className="lede">Ten questions drawn at random from a pool of {EXAM.length}, covering all three
-    modules. One attempt each, with an explanation and a link to the lesson it came from. The pass mark
-    is {PASS_MARK} of 10, and passing produces a printable certificate. Retake it as often as you like;
-    the questions will differ.</p>
+    <p className="lede">The exam consists of 10 questions that will test your understanding of the
+    three modules. The pass mark is {PASS_MARK} of 10 and you can retake it as many times as you
+    would like</p>
     <p>{doneCount < total
       ? 'You have '+(total-doneCount)+' lesson'+(total-doneCount===1?'':'s')+' still open. The exam is available anyway.'
       : 'All modules complete. Good time to take it.'}</p>
